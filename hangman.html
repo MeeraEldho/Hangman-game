@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hangman Game</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f1f1f1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      transition: background-color 0.3s ease;
+    }
+    
+    .game-container {
+      text-align: center;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 400px;
+      width: 100%;
+      position: relative;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    #word {
+      font-size: 2.5em;
+      margin: 20px 0;
+      letter-spacing: 5px;
+      color: #333;
+    }
+
+    #wrong-letters {
+      font-size: 1.1em;
+      color: #d9534f;
+      margin-top: 10px;
+    }
+
+    #attempts {
+      font-size: 1.2em;
+      color: #5bc0de;
+      margin-top: 10px;
+    }
+
+    #message {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-top: 20px;
+    }
+
+    .input-container {
+      margin-top: 30px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 1.2em;
+      width: 60px;
+      border-radius: 5px;
+      border: 2px solid #ccc;
+      text-align: center;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 1.2em;
+      margin-top: 20px;
+      border-radius: 5px;
+      background-color: #5bc0de;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background-color: #aaa;
+    }
+
+    #hangman-img {
+      margin-top: 20px;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      opacity: 0.8;
+      transition: opacity 0.5s ease;
+    }
+
+    #restart {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 1.1em;
+      border-radius: 5px;
+      background-color: #ff6347;
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: none;
+    }
+
+    #theme-toggle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: 2px solid #333;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #333;
+      color: #fff;
+    }
+
+    body.dark-mode .game-container {
+      background-color: #444;
+    }
+
+    body.dark-mode #word,
+    body.dark-mode #wrong-letters,
+    body.dark-mode #attempts {
+      color: #f1f1f1;
+    }
+
+    body.dark-mode button {
+      background-color: #4caf50;
+    }
+
+    /* Animations */
+    .popup {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .popup-wrong {
+      animation: wrongShake 0.5s ease-in-out;
+    }
+
+    @keyframes wrongShake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      50% { transform: translateX(10px); }
+      75% { transform: translateX(-10px); }
+      100% { transform: translateX(0); }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <button id="theme-toggle">🌙</button>
+    <h1>Hangman Game</h1>
+    <div id="word"></div>
+    <div id="wrong-letters"></div>
+    <p id="message"></p>
+    <div id="attempts">Attempts Left: <span>6</span></div>
+    <div class="input-container">
+      <input type="text" id="letter-input" maxlength="1" placeholder="Guess a letter">
+      <button id="submit-letter">Guess</button>
+    </div>
+    <img id="hangman-img" src="images\hangman.png" alt="Hangman">
+    <button id="restart">Restart Game</button>
+  </div>
+
+  <script src="hangman.js"></script>
+</body>
+</html>
